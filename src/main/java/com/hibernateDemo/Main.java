@@ -11,6 +11,7 @@ public class Main {
     EntityManager mf = xmf.createEntityManager();
     Message msg = new Message();
     msg.setUniqueID(2);
+
     msg.setMessage("HelloWorld");
     mf.getTransaction().begin();
     System.out.println("Commiting");
