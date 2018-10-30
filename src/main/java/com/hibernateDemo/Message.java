@@ -1,51 +1,31 @@
 package com.hibernateDemo;
 
-
-
-import javax.persistence.Convert;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import java.time.LocalDate;
-import java.sql.Date;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Message {
-  @Id
-  private int uniqueID;
-  private String message;
-  private LocalDate date;
+    @Id
+    @GeneratedValue
+    private int uniqueID;
+    private String message;
 
-  @Convert
-  LocalDate l = LocalDate.now();
+    @ManyToMany
+    private List<User> userList;
 
-  Date d = new Date(0);
-  LocalDate localDate = LocalDate.ofEpochDay(d.getTime());
-  Date normalDate = new Date(localDate.toEpochDay());
+    public int getUniqueID() {
+        return uniqueID;
+    }
 
+    public void setUniqueID(int uniqueID) {
+        this.uniqueID = uniqueID;
+    }
 
-  public int getUniqueID() {
-    return uniqueID;
-  }
+    public String getMessage() {
+        return message;
+    }
 
-  public void setUniqueID(int uniqueID) {
-    this.uniqueID = uniqueID;
-  }
-
-  public String getMessage() {
-    return message;
-  }
-
-  public void setMessage(String message) {
-    this.message = message;
-  }
-
-  public LocalDate getDate() {
-    setDate(l);
-
-    return date;
-  }
-
-  public void setDate(LocalDate date) {
-    this.date = date;
-  }
+    public void setMessage(String message) {
+        this.message = message;
+    }
 }

@@ -5,20 +5,28 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 public class Main {
+    public static void main(String[] args) {
+        EntityManagerFactory emf =
+                Persistence.createEntityManagerFactory("dataSource");
+        EntityManager em =
+                emf.createEntityManager();
 
-  public static void main(String[] args){
-    EntityManagerFactory xmf = Persistence.createEntityManagerFactory("DBConnect");
-    EntityManager mf = xmf.createEntityManager();
-    Message msg = new Message();
-    msg.setUniqueID(2);
+        Message message = new Message();
+        message.setMessage("Hello Database");
 
-    msg.setMessage("HelloWorld");
-    mf.getTransaction().begin();
-    System.out.println("Commiting");
-    mf.persist(msg);
-    mf.getTransaction().commit();
-    mf.close();
+        User user = new User();
+        user.setUsername("PhiberOptik");
+        user.getMessages().add(message);
 
 
-  }
+        em.persist(message);
+        em.persist(user);
+
+        em.getTransaction().begin();
+        em.getTransaction().commit();
+
+
+
+        emf.close();
+    }
 }
